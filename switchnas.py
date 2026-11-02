@@ -9,7 +9,7 @@ from time import sleep
 import syslog
 import lgpio
 
-import config
+from config import config
 
 syslog.openlog("switchnas",logoption=syslog.LOG_PID, facility=syslog.LOG_DAEMON)
 
