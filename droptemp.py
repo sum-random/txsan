@@ -13,7 +13,7 @@ import sys
 from subprocess import Popen, PIPE
 import lgpio
 
-import config
+from config import config
 
 syslog.openlog("droptemp",logoption=syslog.LOG_PID, facility=syslog.LOG_DAEMON)
 
