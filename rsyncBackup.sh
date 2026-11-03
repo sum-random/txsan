@@ -60,7 +60,7 @@ if [ -d $STAU ] ; then
   [ $(date '+%u') -eq 1 ] && [ $(date '+%d') -gt 7 ] && zfs list -t snapshot | grep -e "${LM}[1-3]|${LM}0[89]" | while read SNAP; do echo zfs destroy -r ${SNAP}; done
   # remove monthlies older than 3 months and leave quarterlies behind
   LQ=$(date -d '6 months ago' '+%Y%m')
-  date '+%m' | grep -qE '03 06 09 12' || zfs list -t snapshot | grep ${LQ} | while read SNAP; do echo zfs destroy -r ${SNAP}; done
+  date '+%m' | grep -qE '03|06|09|12' || zfs list -t snapshot | grep ${LQ} | while read SNAP; do echo zfs destroy -r ${SNAP}; done
 fi 2>&1 | logger -t rsync 
 
 # if the copy operation was short, turn off the pool array, leave it running if the rsync took longer than an hour
