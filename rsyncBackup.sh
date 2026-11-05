@@ -54,7 +54,7 @@ if [ -d $STAU ] ; then
   wait
   zfs list -t snapshot | grep -q ${SNAPDATE} || zfs snapshot -r ${SR}@${SNAPDATE}
   # remove daily snapshots more than two weeks old, leaving monday as weeklies
-  [ $(date '+%u') -ne 1 ] && echo zfs destroy -r ${SR}@$(date -d '14 days ago' '+%Y%m%d')
+  [ $(date '+%u') -ne 1 ] && zfs destroy -r ${SR}@$(date -d '14 days ago' '+%Y%m%d')
   # remove weeklies from previous month, leaving first weekly behind
   LM=$(date -d '2 months ago' '+%Y%m')
   [ $(date '+%u') -eq 1 ] && [ $(date '+%d') -gt 7 ] && zfs list -t snapshot | grep -e "${LM}[1-3]|${LM}0[89]" | while read SNAP; do echo zfs destroy -r ${SNAP}; done
